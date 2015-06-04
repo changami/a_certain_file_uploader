@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20150601230155) do
     t.integer  "owner_id"
     t.string   "filename"
     t.string   "description"
+    t.string   "uuid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

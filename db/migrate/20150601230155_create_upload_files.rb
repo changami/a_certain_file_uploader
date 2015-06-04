@@ -5,6 +5,8 @@ class CreateUploadFiles < ActiveRecord::Migration
       t.string :filename
       t.string :description
 
+      t.string :uuid, :unique => true
+
       t.timestamps
     end
   end
