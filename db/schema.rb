@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20150601230155) do
   create_table "upload_files", force: true do |t|
     t.integer  "owner_id"
     t.string   "filename"
-    t.string   "extension"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
