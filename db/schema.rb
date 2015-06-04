@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512045918) do
+ActiveRecord::Schema.define(version: 20150601230155) do
+
+  create_table "upload_files", force: true do |t|
+    t.integer  "owner_id"
+    t.string   "filename"
+    t.string   "extension"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
