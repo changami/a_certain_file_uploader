@@ -28,7 +28,7 @@ class UploadFilesController < ApplicationController
   # POST /upload_files.json
   def create
     form_params = upload_file_params
-    @upload_file = UploadFile.new(user: session[:user_id],
+    @upload_file = UploadFile.new(user: current_user,
                                   filename: form_params[:file].original_filename,
                                   description: form_params[:description])
     if @upload_file.save
@@ -55,7 +55,7 @@ class UploadFilesController < ApplicationController
   # DELETE /upload_files/1.json
   def destroy
     if @upload_file.present?
-      if @upload_file.user == session[:user_id]
+      if @upload_file.user == current_user
         filepath = upload_filepath
         if FileTest.exist?(filepath)
           begin
