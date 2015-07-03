@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  operation: 1
+  upload_file_id: 
+
+two:
+  user_id: 
+  operation: 1
+  upload_file_id: 

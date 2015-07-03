@@ -1,5 +1,6 @@
 class UploadFile < ActiveRecord::Base
   belongs_to :user, :foreign_key => 'owner_id'
+  has_many :operation_histories, :dependent => :nullify
 
   before_validation :set_uuid
 
