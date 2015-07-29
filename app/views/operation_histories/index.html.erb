@@ -13,10 +13,13 @@
     <% @operation_histories.each do |oh| %>
       <tr>
         <td>
-            <% case oh.operation when 'upload' %>
-              <%= oh.upload_file.filename || 'File' %> was uploaded.
-            <% when 'remove' %>
-              <%= oh.upload_file.filename || 'File' %> was removed.
+            <% if oh.operation == 'upload' || oh.operation == 'remove' %>
+              <%= oh.upload_file.present? ? oh.upload_file.filename : 'File' %>
+              <% if oh.operation == 'upload' %>
+                was uploaded.
+              <% else %>
+                was removed.
+              <% end %>
             <% else %>
               Unknown operation was performed.
             <% end %>
