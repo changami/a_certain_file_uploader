@@ -1,0 +1,33 @@
+<h1>Listing operation_histories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% if @operation_histories.present? %>
+    <% @operation_histories.each do |oh| %>
+      <tr>
+        <td>
+            <% case oh.operation when 'upload' %>
+              <%= oh.upload_file.filename || 'File' %> was uploaded.
+            <% when 'remove' %>
+              <%= oh.upload_file.filename || 'File' %> was removed.
+            <% else %>
+              Unknown operation was performed.
+            <% end %>
+        </td>
+        <td><%= oh.created_at %></td>
+      </tr>
+    <% end %>
+<% else %>
+      <tr>
+          <td colspan="2">operation history is not found.</td>
+      </tr>
+<% end %>
+  </tbody>
+</table>
