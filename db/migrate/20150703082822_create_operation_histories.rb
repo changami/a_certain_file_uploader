@@ -3,6 +3,7 @@ class CreateOperationHistories < ActiveRecord::Migration
     create_table :operation_histories do |t|
       t.references :user, index: true, null: false
       t.integer :operation, default: 0, null: false
+      t.string :filename
       t.references :upload_file, index: true
 
       t.timestamps

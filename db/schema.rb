@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20150703082822) do
   create_table "operation_histories", force: true do |t|
     t.integer  "user_id",                    null: false
     t.integer  "operation",      default: 0, null: false
+    t.string   "filename"
     t.integer  "upload_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
