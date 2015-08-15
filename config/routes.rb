@@ -54,8 +54,12 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
   root 'logins#index'
-  resource :login, only: %i{show create destroy}
+
+  get 'login' => 'logins#new'
+  post 'login' => 'logins#create'
+  get 'logout' => 'logins#destroy'
 
   resources :upload_files, only: [:index, :create, :new, :show, :destroy]
 end

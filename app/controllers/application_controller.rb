@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
       if current_user.blank?
         session[:original_action] = { controller: controller_name, action: action_name }
         session[:original_action][:id] = params[:id] if params.present? && params.has_key?(:id)
-        redirect_to controller: 'logins', action: 'show'
+        redirect_to controller: 'logins', action: 'new'
       else
         session[:original_action] = nil
       end
