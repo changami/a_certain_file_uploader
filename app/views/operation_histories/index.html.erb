@@ -14,7 +14,7 @@
       <tr>
         <td>
             <% if oh.operation == 'upload' || oh.operation == 'remove' %>
-              <%= oh.upload_file.present? ? oh.upload_file.filename : 'File' %>
+              <%= oh.upload_file.present? ? link_to(oh.filename, oh.upload_file) : oh.filename %>
               <% if oh.operation == 'upload' %>
                 was uploaded.
               <% else %>
