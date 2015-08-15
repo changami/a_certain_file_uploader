@@ -14,9 +14,13 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   private
-  def check_login
-    if current_user.blank?
-      redirect_to controller: 'logins', action: 'show'
+    def check_login
+      if current_user.blank?
+        session[:original_action] = { controller: controller_name, action: action_name }
+        session[:original_action][:id] = params[:id] if params.present? && params.has_key?(:id)
+        redirect_to controller: 'logins', action: 'show'
+      else
+        session[:original_action] = nil
+      end
     end
-  end
 end

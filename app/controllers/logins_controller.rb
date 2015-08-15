@@ -13,7 +13,7 @@ class LoginsController < ApplicationController
     user = User.find_by_name params[:name]
     if user && user.authenticate(params[:pass])
       session[:user_id] = user.id
-      redirect_to root_path
+      redirect_to session[:original_action] || root_path
     else
       flash.now.alert = "Please input once again."
       render "new"
