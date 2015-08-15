@@ -1,4 +1,6 @@
 class LoginsController < ApplicationController
+  skip_before_action :check_login
+
   def index
     render "index"
   end
