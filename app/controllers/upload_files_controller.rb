@@ -50,12 +50,15 @@ class UploadFilesController < ApplicationController
           f.flush
         end
       rescue
-        render :new, notice: 'File could not be uploaded due to technical reasons.'
+        flash[:alert] = 'File could not be uploaded due to technical reasons.'
+        redirect_to action: :new
       else
-        redirect_to upload_files_url, notice: 'File was successfully uploaded.'
+        flash[:notice] = 'File was successfully uploaded.'
+        redirect_to upload_files_url
       end
     else
-      render :new, notice: 'File could not be uploaded due to technical reasons.'
+      flash[:alert] = 'File could not be uploaded due to technical reasons.'
+      redirect_to action: :new
     end
   end
 
