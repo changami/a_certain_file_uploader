@@ -3,11 +3,15 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  def is_default_space_quota?
+    self.quota.blank?
+  end
+
   def space_quota
-    if self.quota.present?
-      self.quota
-    else
+    if self.is_default_space_quota?
       ACertainFileUploader::Application.config.default_space_quota
+    else
+      self.quota
     end
   end
 
