@@ -28,6 +28,14 @@ class UploadFilesController < ApplicationController
   # POST /upload_files.json
   def create
     form_params = upload_file_params
+
+    # check space quota
+    if form_params[:file].size + current_user.space_usage > current_user.space_quota
+      flash[:alert] = 'File could not be uploaded because space limit exceed.'
+      redirect_to action: :new
+      return
+    end
+
     @upload_file = UploadFile.new(user: current_user,
                                   filename: form_params[:file].original_filename,
                                   description: form_params[:description])
