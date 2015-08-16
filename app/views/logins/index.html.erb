@@ -3,5 +3,6 @@
 <% if current_user == nil %>
     <%= link_to "login", login_path %>
 <% else %>
+    <p><%= link_to 'Administrator Menu', admin_top_path %></p>
     <%= link_to 'logout', login_path, :confirm => 'Logout from this pages?', :method => :delete %>
 <% end %>
