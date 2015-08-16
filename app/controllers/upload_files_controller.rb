@@ -94,6 +94,6 @@ class UploadFilesController < ApplicationController
     end
 
     def upload_filepath
-      'public/' + ACertainFileUploader::Application.config.upload_dir.scan(/^(.*)\/?$/)[0][0] + '/' + @upload_file.uuid
+      File.join(ACertainFileUploader::Application.config.upload_dir, @upload_file.uuid)
     end
 end

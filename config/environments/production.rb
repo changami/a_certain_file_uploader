@@ -75,4 +75,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # File Upload Directory (if path is relative, use Rails.root as root directory.)
+  # config.upload_dir = 'public/uploads'
 end
