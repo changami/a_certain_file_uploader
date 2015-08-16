@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        name: 'User Name'
+        password: 'Password'
+        quota: 'Space Quota'
+        use_default_space_quota: 'Use Default Space Quota'

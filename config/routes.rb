@@ -58,4 +58,9 @@ Rails.application.routes.draw do
   resource :login, only: %i{show create destroy}
 
   resources :upload_files, only: [:index, :create, :new, :show, :destroy]
+
+  get '/admin' => 'admin#index', as: :admin_top
+  get '/admin/users' => 'admin#users', as: :users
+  get '/admin/user/:id' => 'admin#edit_user', as: :edit_user
+  patch '/admin/user/:id' => 'admin#update_user', as: :update_user
 end

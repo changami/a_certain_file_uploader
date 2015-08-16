@@ -1,0 +1,31 @@
+<h1>User Settings</h1>
+
+<p>
+    <span style="color: #FF0000;"><%= flash[:alert] %></span>
+    <% if @user.errors.any? %>
+    <ul>
+        <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
+</p>
+<p><span style="color: #0000FF;"><%= flash[:notice] %></span></p>
+
+<%= form_for(@user, url: :update_user) do |f| %>
+    <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, disabled: true %>
+    </div>
+    <div class="field">
+        <%= f.label :quota_mb %>
+        <%= f.text_field :quota_mb %>MB<br>
+        <%= f.check_box :use_default_space_quota, { checked: @user.is_default_space_quota? } %>
+        <%= f.label :use_default_space_quota%>
+    </div>
+    <div class="actions">
+        <%= f.submit %>
+    </div>
+<% end %>
+
+<p><%= link_to 'Back to User List', users_path %></p>
