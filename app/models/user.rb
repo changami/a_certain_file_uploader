@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  validates :quota_mb, numericality: { only_integer: true, greater_than_or_equal_to: 0, allow_nil: true }
+
   def is_default_space_quota?
     self.quota_mb.blank?
   end
