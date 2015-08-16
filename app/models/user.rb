@@ -4,14 +4,14 @@ class User < ActiveRecord::Base
   has_secure_password
 
   def is_default_space_quota?
-    self.quota.blank?
+    self.quota_mb.blank?
   end
 
   def space_quota
     if self.is_default_space_quota?
-      ACertainFileUploader::Application.config.default_space_quota
+      ACertainFileUploader::Application.config.default_space_quota_mb * (1024 ** 2)
     else
-      self.quota
+      self.quota_mb * (1024 ** 2)
     end
   end
 

@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :name
       t.string :password_digest
-      t.integer :quota
+      t.integer :quota_mb
 
       t.timestamps
     end

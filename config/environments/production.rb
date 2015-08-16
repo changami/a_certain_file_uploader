@@ -79,6 +79,6 @@ Rails.application.configure do
   # File Upload Directory (if path is relative, use Rails.root as root directory.)
   # config.upload_dir = 'public/uploads'
 
-  # User Space Default Quota (Unit: byte)
-  # config.default_space_quota = 500 * 1024 * 1024 # 500MB
+  # User Space Default Quota (Unit: MegaByte)
+  # config.default_space_quota_mb = 500 # 500MB
 end

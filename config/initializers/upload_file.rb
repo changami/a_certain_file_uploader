@@ -13,11 +13,11 @@ Rails.application.configure do
   # Set Space Quota
     begin
       # parse environment configuration quota
-      if config.default_space_quota.is_a?(Integer) == false
-        config.default_space_quota = config.default_space_quota.to_s.to_i
+      if config.default_space_quota_mb.is_a?(Integer) == false
+        config.default_space_quota_mb = config.default_space_quota_mb.to_s.to_i
       end
     rescue NoMethodError
       # set default quota
-      config.default_space_quota = 500 * 1024 * 1024 # 500MB
+      config.default_space_quota_mb = 500 # 500MB
     end
 end
