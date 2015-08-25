@@ -53,8 +53,13 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
   root 'logins#index'
-  resource :login, only: %i{show create destroy}
+
+  get '/login' => 'logins#new', as: 'login_form'
+  post '/login' => 'logins#create', as: 'login'
+  delete '/logout' => 'logins#destroy', as: 'logout'
+
   resources :upload_files, only: [:index, :create, :new, :show, :destroy]
   resources :operation_histories, only: [:index]
 end
