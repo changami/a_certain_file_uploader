@@ -1,7 +1,7 @@
 <h1>TOP</h1>
 
 <% if current_user == nil %>
-    <%= link_to "login", login_path %>
+    <%= link_to 'login', login_form_path %>
 <% else %>
-    <%= link_to 'logout', login_path, :confirm => 'Logout from this pages?', :method => :delete %>
+    <%= link_to 'logout', logout_path, :confirm => 'Logout from this pages?', :method => :delete %>
 <% end %>

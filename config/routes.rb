@@ -57,9 +57,9 @@ Rails.application.routes.draw do
 
   root 'logins#index'
 
-  get 'login' => 'logins#new'
-  post 'login' => 'logins#create'
-  get 'logout' => 'logins#destroy'
+  get '/login' => 'logins#new', as: 'login_form'
+  post '/login' => 'logins#create', as: 'login'
+  delete '/logout' => 'logins#destroy', as: 'logout'
 
   resources :upload_files, only: [:index, :create, :new, :show, :destroy]
 end
