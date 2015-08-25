@@ -1,0 +1,38 @@
+<h1>Listing operation_histories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% if @operation_histories.present? %>
+    <% @operation_histories.each do |oh| %>
+      <tr>
+        <td>
+            <% if oh.operation == 'upload' || oh.operation == 'remove' %>
+              <%= oh.upload_file.present? ? link_to(oh.filename, oh.upload_file) : oh.filename %>
+              <% if oh.operation == 'upload' %>
+                was uploaded.
+              <% else %>
+                was removed.
+              <% end %>
+            <% else %>
+              Unknown operation was performed.
+            <% end %>
+        </td>
+        <td><%= oh.created_at %></td>
+      </tr>
+    <% end %>
+<% else %>
+      <tr>
+          <td colspan="2">operation history is not found.</td>
+      </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Upload files list', upload_files_path %>

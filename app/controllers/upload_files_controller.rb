@@ -44,6 +44,10 @@ class UploadFilesController < ApplicationController
       rescue
         render :new, notice: 'File could not be uploaded due to technical reasons.'
       else
+        OperationHistory.create(user: current_user,
+                                operation: OperationHistory.operations[:upload],
+                                filename: @upload_file.filename,
+                                upload_file: @upload_file)
         redirect_to upload_files_url, notice: 'File was successfully uploaded.'
       end
     else
@@ -63,6 +67,10 @@ class UploadFilesController < ApplicationController
           rescue
             redirect_to upload_files_url, notice: 'File could not be removed due to technical reasons.'
           else
+            OperationHistory.create(user: current_user,
+                                    operation: OperationHistory.operations[:remove],
+                                    filename: @upload_file.filename,
+                                    upload_file: nil)
             @upload_file.destroy
             redirect_to upload_files_url, notice: 'File was successfully removed.'
           end

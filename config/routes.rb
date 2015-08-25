@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :upload_files
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -56,6 +55,6 @@ Rails.application.routes.draw do
   #   end
   root 'logins#index'
   resource :login, only: %i{show create destroy}
-
   resources :upload_files, only: [:index, :create, :new, :show, :destroy]
+  resources :operation_histories, only: [:index]
 end
