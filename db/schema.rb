@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601230155) do
+ActiveRecord::Schema.define(version: 20150831014507) do
 
   create_table "upload_files", force: true do |t|
     t.integer  "owner_id"
@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 20150601230155) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "password_digest"
-    t.integer  "quota_mb"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quota_mb"
   end
 
 end
