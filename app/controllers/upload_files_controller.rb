@@ -28,6 +28,14 @@ class UploadFilesController < ApplicationController
   # POST /upload_files.json
   def create
     form_params = upload_file_params
+
+    # check space quota
+    if form_params[:file].size + current_user.space_usage > current_user.space_quota
+      flash[:alert] = 'File could not be uploaded because space limit exceed.'
+      redirect_to action: :new
+      return
+    end
+
     @upload_file = UploadFile.new(user: current_user,
                                   filename: form_params[:file].original_filename,
                                   description: form_params[:description])
@@ -42,16 +50,19 @@ class UploadFilesController < ApplicationController
           f.flush
         end
       rescue
-        render :new, notice: 'File could not be uploaded due to technical reasons.'
+        flash[:alert] = 'File could not be uploaded due to technical reasons.'
+        redirect_to action: :new
       else
         OperationHistory.create(user: current_user,
                                 operation: OperationHistory.operations[:upload],
                                 filename: @upload_file.filename,
                                 upload_file: @upload_file)
-        redirect_to upload_files_url, notice: 'File was successfully uploaded.'
+        flash[:notice] = 'File was successfully uploaded.'
+        redirect_to upload_files_url
       end
     else
-      render :new, notice: 'File could not be uploaded due to technical reasons.'
+      flash[:alert] = 'File could not be uploaded due to technical reasons.'
+      redirect_to action: :new
     end
   end
 
@@ -102,6 +113,6 @@ class UploadFilesController < ApplicationController
     end
 
     def upload_filepath
-      'public/' + ACertainFileUploader::Application.config.upload_dir.scan(/^(.*)\/?$/)[0][0] + '/' + @upload_file.uuid
+      File.join(ACertainFileUploader::Application.config.upload_dir, @upload_file.uuid)
     end
 end

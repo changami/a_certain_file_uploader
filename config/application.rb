@@ -20,7 +20,8 @@ module ACertainFileUploader
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # File Upload Directory (under #{Rails.root}/public)
-    config.upload_dir = 'uploads'
+    ActionView::Base.field_error_proc = proc do |html_tag, _instance|
+      html_tag.html_safe
+    end
   end
 end

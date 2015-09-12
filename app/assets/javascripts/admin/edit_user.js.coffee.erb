@@ -1,0 +1,28 @@
+<% @default_user_space_quota = ACertainFileUploader::Application.config.default_space_quota_mb.to_s %>
+
+ready = ->
+    quota_fields = do ->
+        _user_quota_original_value = $('#user_quota_mb').val()
+
+        update_state: ->
+            if $('#user_use_default_space_quota').prop('checked')
+                $('#user_quota_mb').off('change', quota_fields.notice_changed)
+                $('#user_quota_mb').val('<%= @default_user_space_quota %>')
+                $('#user_quota_mb').prop('disabled', true)
+            else
+                if _user_quota_original_value isnt ''
+                    $('#user_quota_mb').val(_user_quota_original_value)
+                else
+                    $('#user_quota_mb').val('<%= @default_user_space_quota %>')
+                $('#user_quota_mb').change(quota_fields.notice_changed)
+                $('#user_quota_mb').prop('disabled', false)
+            return true
+
+        notice_changed: ->
+            _user_quota_original_value = $('#user_quota_mb').val()
+
+    $('#user_use_default_space_quota').click(quota_fields.update_state)
+    quota_fields.update_state()
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

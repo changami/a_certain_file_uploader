@@ -62,4 +62,9 @@ Rails.application.routes.draw do
 
   resources :upload_files, only: [:index, :create, :new, :show, :destroy]
   resources :operation_histories, only: [:index]
+
+  get '/admin' => 'admin#index', as: :admin_top
+  get '/admin/users' => 'admin#users', as: :users
+  get '/admin/user/:id' => 'admin#edit_user', as: :edit_user
+  patch '/admin/user/:id' => 'admin#update_user', as: :update_user
 end

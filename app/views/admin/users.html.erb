@@ -1,0 +1,45 @@
+<h1>Listing Users</h1>
+
+<p><span style="color: #FF0000;"><%= flash[:alert] %></span></p>
+<p><span style="color: #0000FF;"><%= flash[:notice] %></span></p>
+
+<table>
+    <thead>
+    <tr>
+        <th>UserName</th>
+        <th>Space</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+<% @users.each do |user| %>
+    <%
+       @usage_percentage = user.space_quota == 0 ? 1 : user.space_usage / user.space_quota
+       @usage_html_color_red = @usage_percentage > 0.8 ? sprintf('%X', 255 * (@usage_percentage * 5 - 4)) : '00'
+    %>
+        <tr>
+            <td><%= user.name %></td>
+            <td>
+                <span style="color: #<%= @usage_html_color_red %>0000;">
+                    <%= number_to_human_size(user.space_usage, precision: 2) %>
+                </span>
+                /
+    <% if user.is_default_space_quota? %>
+                <%= number_to_human_size(user.space_quota, precision: 2) %>
+    <% else %>
+                <span style="color: #0000CD;">
+                    <%= number_to_human_size(user.space_quota, precision: 2) %>
+                </span>
+    <% end %>
+                (<%= number_to_percentage(@usage_percentage * 100, precision: 2) %>)
+            </td>
+            <td>
+                <%= link_to 'Edit', edit_user_path(user) %>
+            </td>
+        </tr>
+<% end %>
+    </tbody>
+</table>
+
+<p><%= link_to 'Back to Administrator Menu', admin_top_path %></p>

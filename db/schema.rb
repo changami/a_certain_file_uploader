@@ -11,19 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703082822) do
-
-  create_table "operation_histories", force: true do |t|
-    t.integer  "user_id",                    null: false
-    t.integer  "operation",      default: 0, null: false
-    t.string   "filename"
-    t.integer  "upload_file_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "operation_histories", ["upload_file_id"], name: "index_operation_histories_on_upload_file_id"
-  add_index "operation_histories", ["user_id"], name: "index_operation_histories_on_user_id"
+ActiveRecord::Schema.define(version: 20150831014507) do
 
   create_table "upload_files", force: true do |t|
     t.integer  "owner_id"
@@ -39,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150703082822) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quota_mb"
   end
 
 end

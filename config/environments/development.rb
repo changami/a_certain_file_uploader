@@ -34,4 +34,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # File Upload Directory (if path is relative, use Rails.root as root directory.)
+  # config.upload_dir = 'public/uploads'
+
+  # User Space Default Quota (Unit: MegaByte)
+  # config.default_space_quota_mb = 500 # 500MB
 end
