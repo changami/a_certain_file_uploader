@@ -1,3 +1,4 @@
+<% require 'bigdecimal' %>
 <h1>Listing Users</h1>
 
 <p><span style="color: #FF0000;"><%= flash[:alert] %></span></p>
@@ -15,7 +16,7 @@
     <tbody>
 <% @users.each do |user| %>
     <%
-       @usage_percentage = user.space_quota == 0 ? 1 : user.space_usage / user.space_quota
+       @usage_percentage = user.space_quota == 0 ? 1 : BigDecimal.new(user.space_usage) / BigDecimal.new(user.space_quota)
        @usage_html_color_red = @usage_percentage > 0.8 ? sprintf('%X', 255 * (@usage_percentage * 5 - 4)) : '00'
     %>
         <tr>
